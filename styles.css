@@ -288,7 +288,7 @@ ul {
 /* Hero Images Container */
 .hero-images {
 	position: relative;
-	height: 500px;
+	height: 450px;
 	width: 100%;
 	animation: fadeIn 1.2s ease-out;
 	perspective: 1000px;
