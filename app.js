@@ -151,70 +151,78 @@ document.addEventListener("DOMContentLoaded", function () {
 		}, 5000);
 	}
 
-	// Form submission Logic
-	const contactForm = document.getElementById("contact-form");
-	const successMessage = document.getElementById("success-message");
+	// Utilities
+function isValidEmailFormat(email) {
+	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	return regex.test(email);
+}
 
-	if (contactForm) {
-		contactForm.addEventListener("submit", async function (e) {
-			e.preventDefault();
+function isDisposableEmail(email) {
+	const domain = email.split("@")[1].toLowerCase();
+	const bannedDomains = [
+		"mailinator.com", "10minutemail.com", "tempmail.com", "guerrillamail.com",
+		"yopmail.com", "dispostable.com", "fakeinbox.com", "trashmail.com"
+	];
+	return bannedDomains.includes(domain);
+}
 
-			const name = document.getElementById("name").value;
-			const email = document.getElementById("email").value;
-			const subject = document.getElementById("subject").value;
-			const message = document.getElementById("message").value;
+// Form submission logic
+const contactForm = document.getElementById("contact-form");
+const successMessage = document.getElementById("success-message");
 
-			try {
-				const response = await fetch("https://formspree.io/f/xvgrzadr", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-					},
-					body: JSON.stringify({
-						name,
-						email,
-						subject,
-						message,
-					}),
-				});
+if (contactForm) {
+	contactForm.addEventListener("submit", async function (e) {
+		e.preventDefault();
 
-				if (response.ok) {
-					// Show success message
-					successMessage.style.display = "block";
-					successMessage.style.opacity = "1";
+		const name = document.getElementById("name").value.trim();
+		const email = document.getElementById("email").value.trim();
+		const subject = document.getElementById("subject").value.trim();
+		const message = document.getElementById("message").value.trim();
 
-					// Fade out after 4s
+		// ✅ Email Validation
+		if (!isValidEmailFormat(email)) {
+			alert("Please enter a valid email address.");
+			return;
+		}
+
+		if (isDisposableEmail(email)) {
+			alert("Temporary or disposable emails are not allowed. Use a valid email.");
+			return;
+		}
+
+		// ✅ Proceed to send message
+		try {
+			const response = await fetch("https://formspree.io/f/xvgrzadr", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: JSON.stringify({ name, email, subject, message }),
+			});
+
+			if (response.ok) {
+				successMessage.style.display = "block";
+				successMessage.style.opacity = "1";
+
+				setTimeout(() => {
+					successMessage.style.opacity = "0";
 					setTimeout(() => {
-						successMessage.style.opacity = "0";
-						setTimeout(() => {
-							successMessage.style.display = "none";
-						}, 1000); // match CSS transition
-					}, 4000);
+						successMessage.style.display = "none";
+					}, 1000);
+				}, 4000);
 
-					successMessage.classList.add("show");
-					successMessage.style.display = "block";
-
-					setTimeout(() => {
-						successMessage.classList.remove("show");
-						setTimeout(() => {
-							successMessage.style.display = "none";
-						}, 1000);
-					}, 4000);
-
-					// Reset form
-					contactForm.reset();
-				} else {
-					alert("Oops! Something went wrong. Please try again.");
-				}
-			} catch (error) {
-				console.error("Error submitting form:", error);
-				alert(
-					"Failed to send message. Check your internet or try again later."
-				);
+				contactForm.reset();
+			} else {
+				alert("Oops! Something went wrong. Please try again.");
 			}
-		});
-	}
+		} catch (error) {
+			console.error("Error submitting form:", error);
+			alert("Failed to send message. Check your internet or try again later.");
+		}
+	});
+}
+
 
 	// Smooth scrolling for anchor links
 	document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
