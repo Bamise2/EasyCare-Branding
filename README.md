@@ -1,6 +1,6 @@
 # EasyCare Branding
 
-The official website for **EasyCare Branding** — a creative branding agency specializing in graphic design, brand identity, and web development.
+The official website for **EasyCare Branding**, a creative branding agency specializing in graphic design, brand identity, and web development.
 
 ## 🌐 Live Site
 
