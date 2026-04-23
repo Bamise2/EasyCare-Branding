@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Navbar } from '../components/Navbar';
 import { CanvasIntro } from '../components/CanvasIntro';
 import { GallerySection } from '../components/GallerySection';

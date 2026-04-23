@@ -31,7 +31,7 @@ export const Testimonials: React.FC = () => {
   const cardRef   = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const animateSlide = (dir: 'in' | 'out', fromDir: number) => {
+  const animateSlide = (_dir: 'in' | 'out', fromDir: number) => {
     if (!cardRef.current) return;
     gsap.fromTo(cardRef.current,
       { x: fromDir * 80, opacity: 0 },
