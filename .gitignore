@@ -27,7 +27,6 @@ desktop.ini
 npm-debug.log*
 
 # Heavy assets (now served via Cloudinary CDN)
-public/images/
 video/
 
 # Legacy files (pre-React HTML/CSS/JS)
