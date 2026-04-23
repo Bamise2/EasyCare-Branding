@@ -27,38 +27,6 @@ The official website for **EasyCare Branding** — a creative branding agency sp
 | Build | Vite 5 |
 | Image CDN | Cloudinary (auto-format, auto-quality, responsive widths) |
 
-## 📂 Project Structure
-
-```
-src/
-├── components/
-│   ├── Navbar.tsx          # Global navigation with cross-route scrolling
-│   ├── Hero.tsx            # Typewriter hero with floating polaroid images
-│   ├── About.tsx           # Agency story section
-│   ├── Services.tsx        # Services grid
-│   ├── Portfolio.tsx        # Design + Web portfolio cards
-│   ├── Process.tsx         # Creative process timeline
-│   ├── Testimonials.tsx    # Client testimonials carousel
-│   ├── WhyUs.tsx           # Key differentiators
-│   ├── Contact.tsx         # Contact form
-│   ├── Footer.tsx          # Site footer
-│   ├── CanvasIntro.tsx     # Design portfolio hero intro
-│   ├── GallerySection.tsx  # Animated gallery grid (logos/social/books/flyers)
-│   ├── ImageCard.tsx       # Interactive image card with 3D tilt effects
-│   ├── Lightbox.tsx        # Full-screen image viewer with navigation
-│   └── Outro.tsx           # Portfolio closing CTA
-├── pages/
-│   ├── Home.tsx            # Main landing page
-│   ├── DesignPortfolio.tsx # Design works showcase
-│   └── WebsitePortfolio.tsx# Web development showcase
-├── utils/
-│   └── cloudinary.ts       # Cloudinary image optimisation utility
-├── constants.ts            # Portfolio data (titles, Cloudinary URLs)
-├── types.ts                # TypeScript interfaces
-├── index.css               # Global styles + Tailwind theme
-├── App.tsx                 # Route definitions
-└── main.tsx                # Entry point
-```
 
 ## 🚀 Getting Started
 
