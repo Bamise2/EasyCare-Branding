@@ -57,7 +57,7 @@ export const About: React.FC = () => {
           {/* Image */}
           <div className="about-left relative">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img src="/images/about.jpg" alt="EasyCare Team"
+              <img src="https://res.cloudinary.com/dxzw0j1tf/image/upload/v1776853162/about_bstilz.jpg" alt="EasyCare Team"
                 className="w-full h-80 md:h-96 object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             {/* Orange accent block */}

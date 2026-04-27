@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
         {/* Logo */}
         <a href="#home" onClick={() => scrollTo('#home')}
           className="flex items-center gap-3 cursor-pointer">
-          <img src="/images/brandLogo.png" alt="EasyCare Logo"
+          <img src="https://res.cloudinary.com/dxzw0j1tf/image/upload/v1776853157/brandLogo_twwgtl.png" alt="EasyCare Logo"
                className="w-10 h-10 object-contain" />
           <span className="text-white font-bold text-lg leading-tight">
             EasyCare <span className="text-orange">Branding</span>
