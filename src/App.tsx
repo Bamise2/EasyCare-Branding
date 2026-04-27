@@ -4,6 +4,7 @@ import WebsitePortfolio from "./pages/WebsitePortfolio"
 import { Routes, Route } from "react-router-dom"
 
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from '@vercel/analytics/react';
 
 export default function () {
   return (
@@ -13,7 +14,7 @@ export default function () {
         <Route path="/design-portfolio" element={<DesignPortfolio />} />
         <Route path="/website-portfolio" element={<WebsitePortfolio />} />
       </Routes>
-
+      <Analytics />
       <SpeedInsights />
     </>
   )
