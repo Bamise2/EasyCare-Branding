@@ -32,3 +32,6 @@ video/
 # Legacy files (pre-React HTML/CSS/JS)
 app.js
 styles.css
+
+.vercel
+.env*.local
