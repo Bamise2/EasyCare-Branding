@@ -19,6 +19,7 @@ export const Hero: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [videoSrc, setVideoSrc] = useState('');
 
   const TYPEWRITER_TEXTS = ["Creative Branding.", "Effective Strategy.", "Engaging Socials."];
 
@@ -26,6 +27,14 @@ export const Hero: React.FC = () => {
     // Start typing after entrance animation
     const startTimer = setTimeout(() => setHasStarted(true), 1500);
     return () => clearTimeout(startTimer);
+  }, []);
+
+  useEffect(() => {
+    // Defer loading the large background video to prioritize FCP / LCP assets
+    const timer = setTimeout(() => {
+      setVideoSrc('https://res.cloudinary.com/dxzw0j1tf/video/upload/v1776974007/background_uyvu39.webm');
+    }, 1200);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -86,10 +95,12 @@ export const Hero: React.FC = () => {
         style={{ backgroundImage: 'radial-gradient(circle, #001529 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
       {/* Background video */}
-      <video autoPlay muted loop playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.12] pointer-events-none">
-        <source src="https://res.cloudinary.com/dxzw0j1tf/video/upload/v1776974007/background_uyvu39.webm" type="video/webm" />
-      </video>
+      {videoSrc && (
+        <video autoPlay muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.12] pointer-events-none">
+          <source src={videoSrc} type="video/webm" />
+        </video>
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 w-full grid md:grid-cols-2 gap-8 items-center py-20">
 

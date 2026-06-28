@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Lightbulb, Brain, Handshake } from 'lucide-react';
+import { cloudImg } from '../utils/cloudinary';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,7 +58,8 @@ export const About: React.FC = () => {
           {/* Image */}
           <div className="about-left relative">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img src="https://res.cloudinary.com/dxzw0j1tf/image/upload/v1776853162/about_bstilz.jpg" alt="EasyCare Team"
+              <img src={cloudImg.medium("https://res.cloudinary.com/dxzw0j1tf/image/upload/v1776853162/about_bstilz.jpg")} alt="EasyCare Team"
+                loading="lazy"
                 className="w-full h-80 md:h-96 object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             {/* Orange accent block */}

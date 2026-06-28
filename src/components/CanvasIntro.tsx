@@ -1,6 +1,7 @@
 import React from 'react';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { cloudImg } from '../utils/cloudinary';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -66,7 +67,7 @@ export const CanvasIntro: React.FC = () => {
             >
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
-                style={{ backgroundImage: `url(${hub.img})` }}
+                style={{ backgroundImage: `url(${cloudImg.thumb(hub.img)})` }}
               />
               {/* White gradient overlay at bottom */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />

@@ -27,34 +27,63 @@ export default function App() {
 
   /* ── Dual-layer custom cursor ── */
   useEffect(() => {
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    if (!hasHover) {
+      if (cursorDotRef.current) cursorDotRef.current.style.display = 'none';
+      if (cursorRingRef.current) cursorRingRef.current.style.display = 'none';
+      return;
+    }
+
     let curX = 0, curY = 0;
     let dotX = 0, dotY = 0;
+    let animFrameId = 0;
+    let scaleVal = 1;
 
     const moveCursor = (e: MouseEvent) => {
       curX = e.clientX;
       curY = e.clientY;
-      gsap.to(cursorDotRef.current, { x: curX, y: curY, duration: 0.08, ease: 'none' });
     };
 
     const animateRing = () => {
-      dotX += (curX - dotX) * 0.12;
-      dotY += (curY - dotY) * 0.12;
-      gsap.set(cursorRingRef.current, { x: dotX, y: dotY });
-      requestAnimationFrame(animateRing);
+      dotX += (curX - dotX) * 0.15;
+      dotY += (curY - dotY) * 0.15;
+
+      if (cursorDotRef.current) {
+        cursorDotRef.current.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate3d(-50%, -50%, 0)`;
+      }
+      if (cursorRingRef.current) {
+        cursorRingRef.current.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate3d(-50%, -50%, 0) scale(${scaleVal})`;
+      }
+      animFrameId = requestAnimationFrame(animateRing);
     };
 
-    window.addEventListener('mousemove', moveCursor);
-    animateRing();
+    window.addEventListener('mousemove', moveCursor, { passive: true });
+    animFrameId = requestAnimationFrame(animateRing);
 
     // Scale cursor on clickable elements
-    const onHoverIn  = () => gsap.to(cursorRingRef.current, { scale: 2.2, duration: 0.3, ease: 'power2.out' });
-    const onHoverOut = () => gsap.to(cursorRingRef.current, { scale: 1,   duration: 0.3, ease: 'power2.out' });
-    document.querySelectorAll('button, a, [data-hover]').forEach(el => {
-      el.addEventListener('mouseenter', onHoverIn);
-      el.addEventListener('mouseleave', onHoverOut);
-    });
+    const onHoverIn  = () => { scaleVal = 2.2; };
+    const onHoverOut = () => { scaleVal = 1; };
 
-    return () => window.removeEventListener('mousemove', moveCursor);
+    const hoverElements: HTMLElement[] = [];
+    const setupHoverListeners = () => {
+      document.querySelectorAll('button, a, [data-hover]').forEach(el => {
+        el.addEventListener('mouseenter', onHoverIn, { passive: true });
+        el.addEventListener('mouseleave', onHoverOut, { passive: true });
+        hoverElements.push(el as HTMLElement);
+      });
+    };
+
+    const timerId = setTimeout(setupHoverListeners, 500);
+
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+      cancelAnimationFrame(animFrameId);
+      clearTimeout(timerId);
+      hoverElements.forEach(el => {
+        el.removeEventListener('mouseenter', onHoverIn);
+        el.removeEventListener('mouseleave', onHoverOut);
+      });
+    };
   }, []);
 
   /* ── Gallery container fade-in ── */

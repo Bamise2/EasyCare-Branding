@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img src="/images/brandLogo.png" alt="EasyCare" className="w-9 h-9 object-contain" />
+              <img src="/images/brandLogo.png" alt="EasyCare" loading="lazy" className="w-9 h-9 object-contain" />
               <span className="text-white font-extrabold text-lg">EasyCare</span>
             </div>
             <p className="text-sm leading-relaxed mb-6">Transforming businesses with branding that actually works.</p>
